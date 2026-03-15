@@ -1,0 +1,38 @@
+<uiView>
+  <userInput>
+    <pushButton name="up" onClick="$.put('/Zapp/{zapp_index}/Event', 1, null, 'int32');" onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 2, null, 'int32');" />
+    <pushButton name="down" longType="lock" onClick="$.put('/Zapp/{zapp_index}/Event', 3, null, 'int32');" onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 4, null, 'int32');" />
+  </userInput>
+
+  <div id="suuntoplus">
+
+    <!-- Title -->
+    <div class="cm-mid" style="width:100%;height:20%">
+      <div class="sp-b-s p-hc" style="top:calc(40% - 50%e)">
+        {{appName}}
+      </div>
+      <div class="sp-t-m p-hc" style="top:calc(70% - 50%e)">
+        {{screenWatch}}
+      </div>
+    </div>
+
+    <!-- pausedStr: set via setText() — shows PAUSED or NO GPS -->
+    <div id="pausedStr" class="sp-t-m p-hc" style="top:calc(25% - 50%e);color:red;">--</div>
+
+    <div class="sp-b-m p-hc" style="top:calc(35% - 50%e)">
+      {{labelDistance}}
+    </div>
+
+    <div class="sp-d-m p-hc f-num" style="top:calc(50% - 50%e)">
+      <eval input="/Zapp/{zapp_index}/Output/distanceToAnchor" outputFormat="Count_Fourdigits" default="--" />
+    </div>
+
+    <div class="sp-b-s p-hc" style="top:calc(84% - 50%e)">
+      {{labelRadius}}
+    </div>
+    <div class="sp-d-xs p-hc f-num" style="top:calc(92% - 50%e)">
+      <eval input="/Zapp/{zapp_index}/Output/alarmRadius" outputFormat="Count_Fourdigits" default="--" />
+    </div>
+
+  </div>
+</uiView>

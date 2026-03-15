@@ -1,0 +1,52 @@
+<uiView>
+    <!-- Button handlers trigger onEvent callback in main.js -->
+    <userInput>
+      <pushButton name="up" onClick="$.put('/Zapp/{zapp_index}/Event', 1, null, 'int32');"
+        onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 2, null, 'int32');" />
+      <pushButton name="down" onClick="$.put('/Zapp/{zapp_index}/Event', 3, null, 'int32');"
+        onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 4, null, 'int32');" />
+    </userInput>
+
+  <div id="suuntoplus">
+
+    <!-- Title -->
+    <div class="cm-fg" style="width:100%;height:25%">
+      <div class="sp-b-s p-hc" style="top:calc(40% - 50%e)">
+        {{appName}}
+      </div>
+      <div class="sp-t-m p-hc" style="top:calc(70% - 50%e)">
+        {{screenSetup}}
+      </div>
+    </div>
+
+    <!-- UP button label -->
+    <div class="sp-b-s" style="top:calc(28% - 50%e);left:47%">
+      {{btnUpLabel}}
+    </div>
+    <div class="sp-b-s" style="top:calc(35% - 50%e);left:52%">
+      {{actionStartPause}}
+    </div>
+    <div class="sp-b-s" style="top:calc(42% - 50%e);left:52%">
+      {{actionHoldReset}}
+    </div>
+
+    <!-- DOWN button label -->
+    <div class="sp-b-s" style="top:calc(53% - 50%e);left:47%">
+      {{btnDownLabel}}
+    </div>
+    <div class="sp-b-s" style="top:calc(60% - 50%e);left:52%">
+      {{actionMinus10m}}
+    </div>
+    <div class="sp-b-s" style="top:calc(67% - 50%e);left:52%">
+      {{actionHoldPlus10m}}
+    </div>
+
+    <div class="sp-b-s p-hc" style="top:calc(84% - 50%e)">
+      {{labelRadius}}
+    </div>
+    <div class="sp-d-xs p-hc f-num" style="top:calc(92% - 50%e)">
+      <eval input="/Zapp/{zapp_index}/Output/alarmRadius" outputFormat="Count_Fourdigits" default="--" />
+    </div>
+
+  </div>
+</uiView>

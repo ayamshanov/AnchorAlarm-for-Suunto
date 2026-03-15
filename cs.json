@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Nastavení",
+  "screenWatch": "Hlídka",
+  "btnUpLabel": "Tlač. NAHORU:",
+  "actionStartPause": "start/pauza",
+  "actionHoldReset": "podržet: reset",
+  "btnDownLabel": "Tlač. DOLŮ:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "podržet: +10m",
+  "labelRadius": "Poloměr (m):",
+  "labelDistance": "Vzdálenost (m)",
+  "alarmText": "Vzdálenost překračuje nastavenou hodnotu.",
+  "alarmConfirm": "Potvrdit alarm"
+}

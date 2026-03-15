@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Ρυθμίσεις",
+  "screenWatch": "Βάρδια",
+  "btnUpLabel": "Κουμπί ΠΑΝΩ:",
+  "actionStartPause": "έναρξη/παύση",
+  "actionHoldReset": "κράτημα: επαναφορά",
+  "btnDownLabel": "Κουμπί ΚΑΤΩ:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "κράτημα: +10m",
+  "labelRadius": "Ακτίνα (μ):",
+  "labelDistance": "Απόσταση (μ)",
+  "alarmText": "Η απόσταση υπερβαίνει το ορισμένο όριο.",
+  "alarmConfirm": "Επιβεβαίωση συναγερμού"
+}

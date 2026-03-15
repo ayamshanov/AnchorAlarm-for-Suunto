@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Asetukset",
+  "screenWatch": "Vartio",
+  "btnUpLabel": "YLÖS nappi:",
+  "actionStartPause": "käynnistä/tauko",
+  "actionHoldReset": "pidä: nollaa",
+  "btnDownLabel": "ALAS nappi:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "pidä: +10m",
+  "labelRadius": "Säde (m):",
+  "labelDistance": "Etäisyys (m)",
+  "alarmText": "Etäisyys ylittää asetetun rajan.",
+  "alarmConfirm": "Vahvista hälytys"
+}

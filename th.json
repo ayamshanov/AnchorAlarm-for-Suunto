@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "ตั้งค่า",
+  "screenWatch": "เฝ้าระวัง",
+  "btnUpLabel": "ปุ่มขึ้น:",
+  "actionStartPause": "เริ่ม/หยุด",
+  "actionHoldReset": "กดค้าง: รีเซ็ต",
+  "btnDownLabel": "ปุ่มลง:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "กดค้าง: +10m",
+  "labelRadius": "รัศมี (ม.):",
+  "labelDistance": "ระยะทาง (ม.)",
+  "alarmText": "ระยะทางเกินเกณฑ์ที่กำหนด",
+  "alarmConfirm": "ยืนยันการแจ้งเตือน"
+}

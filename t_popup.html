@@ -1,0 +1,14 @@
+<uiView>
+  <userInput>
+    <!-- type="lock" requires a deliberate press (prevents accidental dismiss) -->
+    <pushButton name="up" type="lock" onClick="$.put('/Zapp/{zapp_index}/Event', 5, null, 'int32');" />
+    <pushButton name="down" type="lock" onClick="$.put('/Zapp/{zapp_index}/Event', 6, null, 'int32');" />
+  </userInput>
+
+  <div id="suuntoplus">
+    <:dialogTop
+      textBody="{{alarmText}}"
+      btnTopText="{{alarmConfirm}}"
+      btnTopShapeClass="c-red" />
+  </div>
+</uiView>

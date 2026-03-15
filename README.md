@@ -1,0 +1,161 @@
+# Anchor Alarm
+
+![Quick Start Guide](./assets/quickStartGuide.jpg)
+
+> **Sleep soundly at anchor.** Anchor Alarm is a SuuntoPlus feature app that continuously monitors your boat's position while you rest, and alerts you the moment the anchor starts to drag.
+
+---
+
+## Why you need it
+
+Anchoring overnight or in changing conditions always carries the risk of anchor drag — the anchor breaks free and the boat silently drifts toward rocks, shallows, or other vessels. Traditional anchor watch means someone stays awake. **Anchor Alarm** turns your Suunto watch into an always-on anchor watch that never falls asleep.
+
+- Set your alarm radius once, start the watch, and go rest.
+- The app tracks your distance from the saved anchor position every second using GPS.
+- The moment you drift beyond the set radius, your watch sounds an alert and shows an alarm screen — so you can react in time.
+
+---
+
+## How it works
+
+When you start a watch, the app saves your current GPS coordinates as the **anchor position**. From that point on, every second it:
+
+1. Reads the current GPS coordinates from the watch sensors.
+2. Calculates the distance from the anchor using the **Haversine formula** (great-circle distance, accurate to within a meter at typical anchor radii).
+3. If the distance exceeds the configured **alarm radius**, triggers an audible alert (`playIndication`) and shows the alarm popup screen.
+4. The alarm re-arms automatically once you return within the safe zone, so subsequent breaches are also caught.
+
+GPS accuracy is gated by the `gpsReadiness` sensor — calculations only run when readiness equals 100%, preventing false alarms during GPS acquisition.
+
+---
+
+## Screens
+
+### Setup screen (`t_setup.html`)
+The entry point of the app. Configure your alarm radius before starting the watch.
+
+| Control | Action |
+|---|---|
+| UP button | Start watch / Pause / Resume |
+| UP hold | Reset watch, return to Setup |
+| DOWN button | Decrease alarm radius by 10 m |
+| DOWN hold | Increase alarm radius by 10 m |
+
+The current alarm radius is displayed at the bottom of the screen. The minimum radius is 10 m.
+
+### Watch screen (`t_watch.html`)
+Active monitoring view. Shows real-time distance to the anchor position and the alarm radius for reference.
+
+- **Distance (m)** — current distance to the saved anchor position, updated every second.
+- **Radius (m)** — the configured alarm threshold, shown as a reminder.
+- **Status indicator** — shows `PAUSED` in red when the watch is paused, or `NO GPS` when GPS readiness is below 100%.
+
+Button functions remain the same as on the Setup screen.
+
+### Alarm popup (`t_popup.html`)
+Shown automatically when drift exceeds the alarm radius. Uses the `<:dialogTop>` component with a red confirmation button.
+
+| Control | Action |
+|---|---|
+| UP button (lock) | Confirm and return to Watch screen |
+
+The `type="lock"` attribute on the button requires a deliberate press to prevent accidental dismissal.
+
+---
+
+## File structure
+
+```
+AnchorAlarm/
+│
+├── assets/
+│   └── quickStartGuide.png  # Quick-start button reference card
+│
+├── main.js              # Core application logic
+│                          (evaluate, onLoad, onEvent, getUserInterface)
+│
+├── manifest.json        # App metadata: name, version, input/output resources,
+│                          template list
+│
+├── t_setup.html         # Setup screen template
+├── t_watch.html         # Active watch screen template
+├── t_popup.html         # Alarm popup template
+│
+├── en.json              # Localization: English (source of truth)
+├── de.json              #   German
+├── fr.json              #   French
+├── es.json              #   Spanish
+├── it.json              #   Italian
+├── nl.json              #   Dutch
+├── da.json              #   Danish
+├── no.json              #   Norwegian
+├── sv.json              #   Swedish
+├── pt.json              #   Portuguese
+├── fi.json              #   Finnish
+├── ru.json              #   Russian
+├── pl.json              #   Polish
+├── cs.json              #   Czech
+├── tr.json              #   Turkish
+├── el.json              #   Greek
+├── he.json              #   Hebrew
+├── th.json              #   Thai
+├── zh-Hans.json         #   Chinese (Simplified)
+├── zh-Hant.json         #   Chinese (Traditional)
+├── ja.json              #   Japanese
+├── ko.json              #   Korean
+│
+├── LICENSE              # MIT License
+├── .gitignore
+└── README.md
+```
+
+### `main.js` — key variables and lifecycle functions
+
+| Symbol | Type | Description |
+|---|---|---|
+| `templates[]` | array | Template names indexed by `currentScreenIndex` |
+| `anchorCoordinates` | object \| null | Saved GPS position at watch start |
+| `alarmActive` | bool | Prevents repeated alarm triggers during a single breach |
+| `calcDistance` | var/function | Haversine formula, returns distance in meters |
+| `evaluate()` | lifecycle | Called ~1 Hz; runs distance/bearing calc and alarm check |
+| `onLoad()` | lifecycle | Initializes output variables |
+| `onEvent()` | lifecycle | Handles button events (IDs 1–6) |
+| `getUserInterface()` | lifecycle | Returns current template name |
+
+### `manifest.json` — input/output resources
+
+**Inputs (`in`)**
+
+| Name | Source | Description |
+|---|---|---|
+| `GeoCoordinates` | `/Fusion/Location/GeoCoordinates` | Current GPS position |
+| `gpsReadiness` | `/Fusion/Location/Readiness` | GPS signal quality (0–100) |
+| `Duration` | `Activity/Move/-1/Duration/Current` | Exercise duration |
+| `Heading` | `/Fusion/Compass/Heading` | Compass heading in degrees |
+
+**Outputs (`out`)**
+
+| Name | Description |
+|---|---|
+| `alarmRadius` | Configured alarm radius in meters |
+| `watchState` | 0 = idle, 1 = active, 2 = paused |
+| `distanceToAnchor` | Current distance to anchor in meters |
+| `bearingToAnchor` | True bearing to anchor (0–360°) |
+| `alarmCount` | Number of alarm events during this watch session |
+
+---
+
+## Platform
+
+- **Device**: Suunto watches with SuuntoPlus support
+- **App type**: SuuntoPlus feature app (`"type": "feature"`, `"usage": "workout"`)
+- **Language**: Restricted JavaScript — top-level `function` declarations are reserved for lifecycle callbacks; helper functions must use `var name = function(...)` syntax
+- **Templates**: Suunto HTML DSL (`<uiView>`, `<userInput>`, `<pushButton>`, `<eval>`, `<:dialogTop>`)
+- **Localization**: 22 languages via `{{key}}` substitution compiled by SuuntoPlus Editor
+
+---
+
+## License
+
+MIT License — see [LICENSE](LICENSE).  
+Copyright © 2026 Alexander Yamshanov

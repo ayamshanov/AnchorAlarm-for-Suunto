@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Настройка",
+  "screenWatch": "Вахта",
+  "btnUpLabel": "Кнопка ВВЕРХ:",
+  "actionStartPause": "старт/пауза",
+  "actionHoldReset": "удержать: сброс",
+  "btnDownLabel": "Кнопка ВНИЗ:",
+  "actionMinus10m": "-10м",
+  "actionHoldPlus10m": "удержать: +10м",
+  "labelRadius": "Радиус (м):",
+  "labelDistance": "Расстояние (м)",
+  "alarmText": "Расстояние превышает установленный порог.",
+  "alarmConfirm": "Подтвердить тревогу"
+}

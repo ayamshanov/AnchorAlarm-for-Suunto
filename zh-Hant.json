@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "設定",
+  "screenWatch": "監視",
+  "btnUpLabel": "上鍵:",
+  "actionStartPause": "開始/暫停",
+  "actionHoldReset": "長按: 重置",
+  "btnDownLabel": "下鍵:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "長按: +10m",
+  "labelRadius": "半徑 (m):",
+  "labelDistance": "距離 (m)",
+  "alarmText": "距離超過設定閾值。",
+  "alarmConfirm": "確認警報"
+}

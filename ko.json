@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "설정",
+  "screenWatch": "감시",
+  "btnUpLabel": "위 버튼:",
+  "actionStartPause": "시작/일시정지",
+  "actionHoldReset": "길게: 초기화",
+  "btnDownLabel": "아래 버튼:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "길게: +10m",
+  "labelRadius": "반경 (m):",
+  "labelDistance": "거리 (m)",
+  "alarmText": "거리가 설정 한계를 초과했습니다.",
+  "alarmConfirm": "알람 확인"
+}

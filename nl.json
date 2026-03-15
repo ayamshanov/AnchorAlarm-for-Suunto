@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Instelling",
+  "screenWatch": "Wacht",
+  "btnUpLabel": "OMHOOG:",
+  "actionStartPause": "start/pauze",
+  "actionHoldReset": "houd: reset",
+  "btnDownLabel": "OMLAAG:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "houd: +10m",
+  "labelRadius": "Straal (m):",
+  "labelDistance": "Afstand (m)",
+  "alarmText": "Afstand overschrijdt drempelwaarde.",
+  "alarmConfirm": "Alarm bevestigen"
+}

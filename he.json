@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "הגדרות",
+  "screenWatch": "משמר",
+  "btnUpLabel": "כפתור למעלה:",
+  "actionStartPause": "התחל/השהה",
+  "actionHoldReset": "החזק: אפס",
+  "btnDownLabel": "כפתור למטה:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "החזק: +10m",
+  "labelRadius": "רדיוס (מ'):",
+  "labelDistance": "מרחק (מ')",
+  "alarmText": "המרחק חורג מהסף שנקבע.",
+  "alarmConfirm": "אשר אזעקה"
+}

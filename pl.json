@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Ustawienia",
+  "screenWatch": "Wachta",
+  "btnUpLabel": "Przycisk GÓRA:",
+  "actionStartPause": "start/pauza",
+  "actionHoldReset": "przytrzymaj: reset",
+  "btnDownLabel": "Przycisk DÓŁ:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "przytrzymaj: +10m",
+  "labelRadius": "Promień (m):",
+  "labelDistance": "Odległość (m)",
+  "alarmText": "Odległość przekracza ustawiony próg.",
+  "alarmConfirm": "Potwierdź alarm"
+}

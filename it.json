@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Impostazione",
+  "screenWatch": "Guardia",
+  "btnUpLabel": "Tasto SU:",
+  "actionStartPause": "avvia/pausa",
+  "actionHoldReset": "tieni: reset",
+  "btnDownLabel": "Tasto GIÙ:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "tieni: +10m",
+  "labelRadius": "Raggio (m):",
+  "labelDistance": "Distanza (m)",
+  "alarmText": "Distanza supera la soglia impostata.",
+  "alarmConfirm": "Conferma allarme"
+}

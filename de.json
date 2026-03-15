@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Einstellung",
+  "screenWatch": "Wache",
+  "btnUpLabel": "OBEN Taste:",
+  "actionStartPause": "Start/Pause",
+  "actionHoldReset": "halten: Reset",
+  "btnDownLabel": "UNTEN Taste:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "halten: +10m",
+  "labelRadius": "Radius (m):",
+  "labelDistance": "Entfernung (m)",
+  "alarmText": "Entfernung überschreitet Schwellenwert.",
+  "alarmConfirm": "Alarm bestätigen"
+}

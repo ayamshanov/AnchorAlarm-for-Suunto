@@ -1,0 +1,15 @@
+{
+  "appName": "Anchor Alarm",
+  "screenSetup": "Opsætning",
+  "screenWatch": "Vagt",
+  "btnUpLabel": "OP knap:",
+  "actionStartPause": "start/pause",
+  "actionHoldReset": "hold: nulstil",
+  "btnDownLabel": "NED knap:",
+  "actionMinus10m": "-10m",
+  "actionHoldPlus10m": "hold: +10m",
+  "labelRadius": "Radius (m):",
+  "labelDistance": "Afstand (m)",
+  "alarmText": "Afstand overskrider grænseværdi.",
+  "alarmConfirm": "Bekræft alarm"
+}
