@@ -1,11 +1,14 @@
 {
   "name": "Anchor Alarm",
-  "version": "0.1",
+  "version": "0.2",
   "author": "Alexander Yamshanov",
   "description": "Anchor watch: monitors boat drift and alerts when anchor radius is exceeded.",
   "type": "feature",
   "usage": "workout",
-  "modificationTime": 1773446400,
+  "modificationTime": 1774285093,
+  "image": [
+    { "name": "arrow-a64.png", "type": "a64" }
+  ],
   "in": [
     {
       "name": "gpsReadiness",
@@ -28,7 +31,7 @@
     { "name": "alarmRadius" },
     { "name": "watchState" },
     { "name": "distanceToAnchor" },
-    { "name": "bearingToAnchor" },
+    { "name": "relBearingToAnchor" },
     { "name": "alarmCount" }
   ],
   "template": [
