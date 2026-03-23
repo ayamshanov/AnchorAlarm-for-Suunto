@@ -1,4 +1,16 @@
-<uiView>
+<uiView
+  onActivate="
+    setStyle('#com-arrow', 'visibility', 'HIDDEN'); // Compass hidden before uncalibrated
+    $.subscribe('/Zapp/{zapp_index}/Output/relBearingToAnchor', function(v) {
+      if (v!=null) {
+        setStyle('#com-arrow', 'TRANSFORMCONTENT', transformation().rotate(v / 360));
+        setStyle('#com-arrow', 'visibility', 'VISIBLE');
+      } else {
+        setStyle('#com-arrow', 'visibility', 'HIDDEN');
+      }
+    }, false);
+  ">
+
   <userInput>
     <pushButton name="up" onClick="$.put('/Zapp/{zapp_index}/Event', 1, null, 'int32');" onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 2, null, 'int32');" />
     <pushButton name="down" longType="lock" onClick="$.put('/Zapp/{zapp_index}/Event', 3, null, 'int32');" onLongPressStart="$.put('/Zapp/{zapp_index}/Event', 4, null, 'int32');" />
@@ -32,6 +44,10 @@
     </div>
     <div class="sp-d-xs p-hc f-num" style="top:calc(92% - 50%e)">
       <eval input="/Zapp/{zapp_index}/Output/alarmRadius" outputFormat="Count_Fourdigits" default="--" />
+    </div>
+
+    <div id="com-arrow" style="width:100%;height:100%;">
+      <img src="arrow-a64.png" style="width:100%;height:100%;color:blue;" /> 
     </div>
 
   </div>

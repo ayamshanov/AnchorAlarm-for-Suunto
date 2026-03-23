@@ -23,28 +23,30 @@ var calcDistance = function(lat1, lon1, lat2, lon2) {
 }
 
 // System starts calling this ~1/sec as soon as the sports app screen is entered.
+var computeRelBearing = function(lat, lon, anchorLat, anchorLon, headingDeg) {
+  var dLon = (anchorLon - lon) * Math.PI / 180;
+  var latR = lat * Math.PI / 180;
+  var anchorLatR = anchorLat * Math.PI / 180;
+  var x = Math.sin(dLon) * Math.cos(anchorLatR);
+  var y = Math.cos(latR) * Math.sin(anchorLatR) - Math.sin(latR) * Math.cos(anchorLatR) * Math.cos(dLon);
+  var bearing = Math.atan2(x, y) * 180 / Math.PI;
+  var bearingToAnchorDeg = (Math.round((bearing + 360) % 360));
+  return (bearingToAnchorDeg - headingDeg + 360) % 360;
+}
+
 function evaluate(input, output) {
   if (output.watchState === 1) {
     if (anchorCoordinates && input.GeoCoordinates && input.gpsReadiness === 100) {
       setText("#pausedStr", " ");
       var lat = input.GeoCoordinates.latitude / COORD_DIVIDER;
       var lon = input.GeoCoordinates.longitude / COORD_DIVIDER;
-      var anchorLat = anchorCoordinates.latitude / COORD_DIVIDER;
-      var anchorLon = anchorCoordinates.longitude / COORD_DIVIDER;
+      var headingDeg = input.Heading * 180 / Math.PI;
+      var anchorLat = anchorCoordinates.latitude;
+      var anchorLon = anchorCoordinates.longitude;
+
       output.distanceToAnchor = Math.round(calcDistance(lat, lon, anchorLat, anchorLon));
-      // Bearing from current position to anchor (degrees from north, 0-360)
-      var dLon = (anchorLon - lon) * Math.PI / 180;
-      var latR = lat * Math.PI / 180;
-      var anchorLatR = anchorLat * Math.PI / 180;
-      var x = Math.sin(dLon) * Math.cos(anchorLatR);
-      var y = Math.cos(latR) * Math.sin(anchorLatR) - Math.sin(latR) * Math.cos(anchorLatR) * Math.cos(dLon);
-      var bearing = Math.atan2(x, y) * 180 / Math.PI;
-      output.bearingToAnchor = Math.round((bearing + 360) % 360);
-      // Relative bearing: direction to anchor relative to current heading
-      var heading = (typeof input.Heading === 'number') ? input.Heading : 0;
-      var rel = (output.bearingToAnchor - heading + 360) % 360;
-      var arrows = ['\uF390', '\uF392', '\uF394', '\uF396', '\uF398', '\uF400', '\uF402', '\uF404'];
-      setText("#arrowStr", arrows[Math.round(rel / 45) % 8]);
+      output.relBearingToAnchor = computeRelBearing(lat, lon, anchorLat, anchorLon, headingDeg);
+
       // Check if boat has drifted beyond alarm radius
       if (output.distanceToAnchor > output.alarmRadius) {
         if (!alarmActive) {
@@ -62,13 +64,12 @@ function evaluate(input, output) {
     } else {
       setText("#pausedStr", "NO GPS");
       output.distanceToAnchor = null;
-      output.bearingToAnchor = null;
-      setText("#arrowStr", "\uF406");
+      output.relBearingToAnchor = null; 
     }
   } else if (output.watchState === 2) {
     setText("#pausedStr", "PAUSED");
     output.distanceToAnchor = null;
-    output.bearingToAnchor = null;
+    output.relBearingToAnchor = null;
   }
 }
 
@@ -77,7 +78,7 @@ function onLoad(input, output) {
     output.alarmRadius = 50; // Default alarm radius in meters
     output.watchState = 0;  // 0 = no watch, 1 = watching, 2 = paused
     output.distanceToAnchor = null;
-    output.bearingToAnchor = null;
+    output.relBearingToAnchor = null;
     output.alarmCount = 0;
 }
 
@@ -94,8 +95,8 @@ function onEvent(input, output, eventId) {
       if (output.watchState === 0) {
         if (input.GeoCoordinates) {
           anchorCoordinates = {
-            latitude: input.GeoCoordinates.latitude,
-            longitude: input.GeoCoordinates.longitude
+            latitude: input.GeoCoordinates.latitude / COORD_DIVIDER,
+            longitude: input.GeoCoordinates.longitude / COORD_DIVIDER
           };
         }
         output.watchState = 1;

@@ -11,7 +11,7 @@
 Anchoring overnight or in changing conditions always carries the risk of anchor drag — the anchor breaks free and the boat silently drifts toward rocks, shallows, or other vessels. Traditional anchor watch means someone stays awake. **Anchor Alarm** turns your Suunto watch into an always-on anchor watch that never falls asleep.
 
 - Set your alarm radius once, start the watch, and go rest.
-- The app tracks your distance from the saved anchor position every second using GPS.
+- The app tracks your distance from the saved anchor position every second using GPS and displays the bearing to the anchor, helping you navigate back if needed.
 - The moment you drift beyond the set radius, your watch sounds an alert and shows an alarm screen — so you can react in time.
 
 ---
@@ -22,8 +22,9 @@ When you start a watch, the app saves your current GPS coordinates as the **anch
 
 1. Reads the current GPS coordinates from the watch sensors.
 2. Calculates the distance from the anchor using the **Haversine formula** (great-circle distance, accurate to within a meter at typical anchor radii).
-3. If the distance exceeds the configured **alarm radius**, triggers an audible alert (`playIndication`) and shows the alarm popup screen.
-4. The alarm re-arms automatically once you return within the safe zone, so subsequent breaches are also caught.
+3. Calculates the relative bearing to the anchor using trigonometric calculations (relative to current heading).
+4. If the distance exceeds the configured **alarm radius**, triggers an audible alert (`playIndication`) and shows the alarm popup screen.
+5. The alarm re-arms automatically once you return within the safe zone, so subsequent breaches are also caught.
 
 GPS accuracy is gated by the `gpsReadiness` sensor — calculations only run when readiness equals 100%, preventing false alarms during GPS acquisition.
 
@@ -47,6 +48,7 @@ The current alarm radius is displayed at the bottom of the screen. The minimum r
 Active monitoring view. Shows real-time distance to the anchor position and the alarm radius for reference.
 
 - **Distance (m)** — current distance to the saved anchor position, updated every second.
+- **Bearing (°)** — the direction to the anchor position, shown as a relative bearing; an arrow icon (arrow-a64.png) points towards the anchor.
 - **Radius (m)** — the configured alarm threshold, shown as a reminder.
 - **Status indicator** — shows `PAUSED` in red when the watch is paused, or `NO GPS` when GPS readiness is below 100%.
 
@@ -66,10 +68,11 @@ The `type="lock"` attribute on the button requires a deliberate press to prevent
 ## File structure
 
 ```
-AnchorAlarm/
+AnchorAlarm-for-Suunto/
 │
 ├── assets/
 │   └── quickStartGuide.png  # Quick-start button reference card
+├── arrow-a64.png        # Arrow icon for bearing display
 │
 ├── main.js              # Core application logic
 │                          (evaluate, onLoad, onEvent, getUserInterface)
@@ -117,6 +120,7 @@ AnchorAlarm/
 | `anchorCoordinates` | object \| null | Saved GPS position at watch start |
 | `alarmActive` | bool | Prevents repeated alarm triggers during a single breach |
 | `calcDistance` | var/function | Haversine formula, returns distance in meters |
+| `computeRelBearing` | var/function | Calculates relative bearing to anchor, returns degrees |
 | `evaluate()` | lifecycle | Called ~1 Hz; runs distance/bearing calc and alarm check |
 | `onLoad()` | lifecycle | Initializes output variables |
 | `onEvent()` | lifecycle | Handles button events (IDs 1–6) |
@@ -140,7 +144,7 @@ AnchorAlarm/
 | `alarmRadius` | Configured alarm radius in meters |
 | `watchState` | 0 = idle, 1 = active, 2 = paused |
 | `distanceToAnchor` | Current distance to anchor in meters |
-| `bearingToAnchor` | True bearing to anchor (0–360°) |
+| `relBearingToAnchor` | Relative bearing to anchor |
 | `alarmCount` | Number of alarm events during this watch session |
 
 ---
