@@ -2,6 +2,8 @@
 
 ![Quick Start Guide](./assets/quickStartGuide.jpg)
 
+> Current version: **v0.3** — see [CHANGELOG](CHANGELOG.md)
+
 > **Sleep soundly at anchor.** Anchor Alarm is a SuuntoPlus feature app that continuously monitors your boat's position while you rest, and alerts you the moment the anchor starts to drag.
 
 ---
@@ -28,6 +30,8 @@ When you start a watch, the app saves your current GPS coordinates as the **anch
 
 GPS accuracy is gated by the `gpsReadiness` sensor — calculations only run when readiness equals 100%, preventing false alarms during GPS acquisition.
 
+The alarm radius is persisted via `localStorage` — the last configured value is restored automatically on next launch.
+
 ---
 
 ## Screens
@@ -42,7 +46,7 @@ The entry point of the app. Configure your alarm radius before starting the watc
 | DOWN button | Decrease alarm radius by 10 m |
 | DOWN hold | Increase alarm radius by 10 m |
 
-The current alarm radius is displayed at the bottom of the screen. The minimum radius is 10 m.
+The current alarm radius is displayed at the bottom of the screen. The minimum radius is 10 m. The last set radius is saved to `localStorage` and restored on next launch.
 
 ### Watch screen (`t_watch.html`)
 Active monitoring view. Shows real-time distance to the anchor position and the alarm radius for reference.
@@ -70,15 +74,21 @@ The `type="lock"` attribute on the button requires a deliberate press to prevent
 ```
 AnchorAlarm-for-Suunto/
 │
+├── ApiZone/
+│   ├── DESCRIPTION.md       # SuuntoPlus Store listing description
+│   ├── banner_image.png     # Store banner
+│   └── screenshot_01.png   # Store screenshot
+│
 ├── assets/
-│   └── quickStartGuide.png  # Quick-start button reference card
+│   └── quickStartGuide.jpg  # Quick-start button reference card
 ├── arrow-a64.png        # Arrow icon for bearing display
 │
 ├── main.js              # Core application logic
 │                          (evaluate, onLoad, onEvent, getUserInterface)
+├── data.json            # Default output variable values (alarmRadius seed)
 │
 ├── manifest.json        # App metadata: name, version, input/output resources,
-│                          template list
+│                          template list, variables block
 │
 ├── t_setup.html         # Setup screen template
 ├── t_watch.html         # Active watch screen template
@@ -107,6 +117,7 @@ AnchorAlarm-for-Suunto/
 ├── ja.json              #   Japanese
 ├── ko.json              #   Korean
 │
+├── CHANGELOG.md
 ├── LICENSE              # MIT License
 ├── .gitignore
 └── README.md
@@ -121,9 +132,10 @@ AnchorAlarm-for-Suunto/
 | `alarmActive` | bool | Prevents repeated alarm triggers during a single breach |
 | `calcDistance` | var/function | Haversine formula, returns distance in meters |
 | `computeRelBearing` | var/function | Calculates relative bearing to anchor, returns degrees |
+| `loadSettings` | var/function | Reads `alarmRadius` from `localStorage`; called in `onLoad` |
 | `evaluate()` | lifecycle | Called ~1 Hz; runs distance/bearing calc and alarm check |
-| `onLoad()` | lifecycle | Initializes output variables |
-| `onEvent()` | lifecycle | Handles button events (IDs 1–6) |
+| `onLoad()` | lifecycle | Initializes output variables and restores persisted radius |
+| `onEvent()` | lifecycle | Handles button events (IDs 1–6); persists radius on change |
 | `getUserInterface()` | lifecycle | Returns current template name |
 
 ### `manifest.json` — input/output resources
@@ -132,20 +144,27 @@ AnchorAlarm-for-Suunto/
 
 | Name | Source | Description |
 |---|---|---|
-| `GeoCoordinates` | `/Fusion/Location/GeoCoordinates` | Current GPS position |
+| `latitude` | `/Fusion/Location/GeoCoordinates.latitude` | Current GPS latitude |
+| `longitude` | `/Fusion/Location/GeoCoordinates.longitude` | Current GPS longitude |
 | `gpsReadiness` | `/Fusion/Location/Readiness` | GPS signal quality (0–100) |
-| `Duration` | `Activity/Move/-1/Duration/Current` | Exercise duration |
-| `Heading` | `/Fusion/Compass/Heading` | Compass heading in degrees |
+| `Heading` | `/Fusion/Compass/Heading` | Compass heading in radians |
 
 **Outputs (`out`)**
 
 | Name | Description |
 |---|---|
-| `alarmRadius` | Configured alarm radius in meters |
+| `gpsReady` | 1 when GPS readiness = 100%, else 0 (used to gate UP button on Setup screen) |
+| `alarmRadius` | Configured alarm radius in meters (persisted via `localStorage`) |
 | `watchState` | 0 = idle, 1 = active, 2 = paused |
 | `distanceToAnchor` | Current distance to anchor in meters |
-| `relBearingToAnchor` | Relative bearing to anchor |
+| `relBearingToAnchor` | Relative bearing to anchor in degrees |
 | `alarmCount` | Number of alarm events during this watch session |
+
+**Variables (`variables`)**
+
+| Path | Shown name | Description |
+|---|---|---|
+| `alarmRadius` | Alarm radius (m) | Exposed in the SuuntoPlus variables panel |
 
 ---
 

@@ -1,7 +1,7 @@
 {
   "appName": "Anchor Alarm",
   "screenSetup": "设置",
-  "screenWatch": "监视",
+  "screenWatch": "Watch",
   "btnUpLabel": "上键:",
   "actionStartPause": "开始/暂停",
   "actionHoldReset": "长按: 重置",
@@ -11,5 +11,6 @@
   "labelRadius": "半径 (m):",
   "labelDistance": "距离 (m)",
   "alarmText": "距离超过设定阈值。",
-  "alarmConfirm": "确认警报"
+  "alarmConfirm": "确认警报",
+  "gpsWaiting": "等待GPS..."
 }

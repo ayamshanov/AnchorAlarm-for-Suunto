@@ -11,5 +11,6 @@
   "labelRadius": "반경 (m):",
   "labelDistance": "거리 (m)",
   "alarmText": "거리가 설정 한계를 초과했습니다.",
-  "alarmConfirm": "알람 확인"
+  "alarmConfirm": "알람 확인",
+  "gpsWaiting": "GPS 대기 중..."
 }

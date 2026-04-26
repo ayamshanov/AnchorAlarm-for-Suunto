@@ -11,5 +11,6 @@
   "labelRadius": "Yarıçap (m):",
   "labelDistance": "Mesafe (m)",
   "alarmText": "Mesafe belirlenen eşiği aştı.",
-  "alarmConfirm": "Alarma onayla"
+  "alarmConfirm": "Alarma onayla",
+  "gpsWaiting": "GPS bekleniyor..."
 }

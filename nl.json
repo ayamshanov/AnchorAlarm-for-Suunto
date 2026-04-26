@@ -11,5 +11,6 @@
   "labelRadius": "Straal (m):",
   "labelDistance": "Afstand (m)",
   "alarmText": "Afstand overschrijdt drempelwaarde.",
-  "alarmConfirm": "Alarm bevestigen"
+  "alarmConfirm": "Alarm bevestigen",
+  "gpsWaiting": "Wachten op GPS..."
 }

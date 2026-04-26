@@ -11,5 +11,6 @@
   "labelRadius": "Raggio (m):",
   "labelDistance": "Distanza (m)",
   "alarmText": "Distanza supera la soglia impostata.",
-  "alarmConfirm": "Conferma allarme"
+  "alarmConfirm": "Conferma allarme",
+  "gpsWaiting": "Attesa GPS..."
 }

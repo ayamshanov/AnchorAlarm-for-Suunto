@@ -11,6 +11,15 @@ var alarmActive = false; // prevents re-triggering while already in alarm state
 
 var COORD_DIVIDER = 10000000;
 
+var loadSettings = function(input, output) {
+  var saved = parseInt(localStorage.getItem('alarmRadius'), 10);
+  if (saved === NaN) {
+    output.alarmRadius = 50;
+  } else {
+    output.alarmRadius = saved;
+  }
+}
+
 // Haversine formula: returns distance in meters between two GPS points
 var calcDistance = function(lat1, lon1, lat2, lon2) {
   var R = 6371000; // Earth radius in meters
@@ -35,11 +44,13 @@ var computeRelBearing = function(lat, lon, anchorLat, anchorLon, headingDeg) {
 }
 
 function evaluate(input, output) {
-  if (output.watchState === 1) {
-    if (anchorCoordinates && input.GeoCoordinates && input.gpsReadiness === 100) {
+  if (output.watchState === 0) {
+    output.gpsReady = (input.gpsReadiness === 100) ? 1 : 0;
+  } else if (output.watchState === 1) {
+    if (anchorCoordinates && input.latitude && input.longitude && input.gpsReadiness === 100) {
       setText("#pausedStr", " ");
-      var lat = input.GeoCoordinates.latitude / COORD_DIVIDER;
-      var lon = input.GeoCoordinates.longitude / COORD_DIVIDER;
+      var lat = input.latitude / COORD_DIVIDER;
+      var lon = input.longitude / COORD_DIVIDER;
       var headingDeg = input.Heading * 180 / Math.PI;
       var anchorLat = anchorCoordinates.latitude;
       var anchorLon = anchorCoordinates.longitude;
@@ -64,7 +75,7 @@ function evaluate(input, output) {
     } else {
       setText("#pausedStr", "NO GPS");
       output.distanceToAnchor = null;
-      output.relBearingToAnchor = null; 
+      output.relBearingToAnchor = null;
     }
   } else if (output.watchState === 2) {
     setText("#pausedStr", "PAUSED");
@@ -75,11 +86,12 @@ function evaluate(input, output) {
 
 // main.js loaded and system starts calling evaluate()
 function onLoad(input, output) {
-    output.alarmRadius = 50; // Default alarm radius in meters
+    loadSettings(input, output);
     output.watchState = 0;  // 0 = no watch, 1 = watching, 2 = paused
     output.distanceToAnchor = null;
     output.relBearingToAnchor = null;
     output.alarmCount = 0;
+    output.gpsReady = 0;
 }
 
 function getUserInterface() {
@@ -93,10 +105,11 @@ function onEvent(input, output, eventId) {
   switch (eventId) {
     case 1:     // start / pause / resume
       if (output.watchState === 0) {
-        if (input.GeoCoordinates) {
+        if (input.gpsReadiness !== 100) break;
+        if (input.latitude && input.longitude) {
           anchorCoordinates = {
-            latitude: input.GeoCoordinates.latitude / COORD_DIVIDER,
-            longitude: input.GeoCoordinates.longitude / COORD_DIVIDER
+            latitude: input.latitude / COORD_DIVIDER,
+            longitude: input.longitude / COORD_DIVIDER
           };
         }
         output.watchState = 1;
@@ -114,6 +127,7 @@ function onEvent(input, output, eventId) {
       }
       break;
     case 2:     // Top button long press — reset watch, clear anchor and all data, return to setup
+      if (output.watchState === 0) break;
       output.watchState = 0;
       playIndication("StopTimer");
       anchorCoordinates = null;
@@ -124,10 +138,12 @@ function onEvent(input, output, eventId) {
     case 3:       // Bottom button pressed — decrease alarm radius
       if (output.alarmRadius > 10) {
         output.alarmRadius -= 10;
+        localStorage.setItem('alarmRadius', output.alarmRadius.toString());
       }
       break;
     case 4:       // Bottom button long press — increase alarm radius
       output.alarmRadius += 10;
+      localStorage.setItem('alarmRadius', output.alarmRadius.toString());
       break;
     case 5:       // Popup button — return to watch screen
     case 6:

@@ -1,4 +1,24 @@
-<uiView>
+<uiView
+  onActivate="
+    setStyle('#btnUpLabel', 'visibility', 'HIDDEN');
+    setStyle('#actionStartPause', 'visibility', 'HIDDEN');
+    setStyle('#actionHoldReset', 'visibility', 'HIDDEN');
+    setStyle('#gpsWaitMsg', 'visibility', 'VISIBLE');
+    $.subscribe('/Zapp/{zapp_index}/Output/gpsReady', function(v) {
+      if (v === 1) {
+        setStyle('#btnUpLabel', 'visibility', 'VISIBLE');
+        setStyle('#actionStartPause', 'visibility', 'VISIBLE');
+        setStyle('#actionHoldReset', 'visibility', 'VISIBLE');
+        setStyle('#gpsWaitMsg', 'visibility', 'HIDDEN');
+      } else {
+        setStyle('#btnUpLabel', 'visibility', 'HIDDEN');
+        setStyle('#actionStartPause', 'visibility', 'HIDDEN');
+        setStyle('#actionHoldReset', 'visibility', 'HIDDEN');
+        setStyle('#gpsWaitMsg', 'visibility', 'VISIBLE');
+      }
+    }, false);
+  ">
+
     <!-- Button handlers trigger onEvent callback in main.js -->
     <userInput>
       <pushButton name="up" onClick="$.put('/Zapp/{zapp_index}/Event', 1, null, 'int32');"
@@ -19,14 +39,19 @@
       </div>
     </div>
 
-    <!-- UP button label -->
-    <div class="sp-b-s" style="top:calc(28% - 50%e);left:47%">
+    <!-- GPS waiting message (shown until gpsReady === 1) -->
+    <div id="gpsWaitMsg" class="sp-b-s p-hc" style="top:calc(35% - 50%e);color:red;">
+      {{gpsWaiting}}
+    </div>
+
+    <!-- UP button label (hidden until gpsReady === 1) -->
+    <div id="btnUpLabel" class="sp-b-s" style="top:calc(28% - 50%e);left:47%">
       {{btnUpLabel}}
     </div>
-    <div class="sp-b-s" style="top:calc(35% - 50%e);left:52%">
+    <div id="actionStartPause" class="sp-b-s" style="top:calc(35% - 50%e);left:52%">
       {{actionStartPause}}
     </div>
-    <div class="sp-b-s" style="top:calc(42% - 50%e);left:52%">
+    <div id="actionHoldReset" class="sp-b-s" style="top:calc(42% - 50%e);left:52%">
       {{actionHoldReset}}
     </div>
 

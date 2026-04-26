@@ -11,5 +11,6 @@
   "labelRadius": "Radius (m):",
   "labelDistance": "Distance (m)",
   "alarmText": "Distance exceeds set threshold.",
-  "alarmConfirm": "Confirm Alarm"
+  "alarmConfirm": "Confirm Alarm",
+  "gpsWaiting": "Waiting for GPS..."
 }

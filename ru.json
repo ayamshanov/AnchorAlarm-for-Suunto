@@ -11,5 +11,6 @@
   "labelRadius": "Радиус (м):",
   "labelDistance": "Расстояние (м)",
   "alarmText": "Расстояние превышает установленный порог.",
-  "alarmConfirm": "Подтвердить тревогу"
+  "alarmConfirm": "Подтвердить тревогу",
+  "gpsWaiting": "Ожидание GPS..."
 }

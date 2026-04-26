@@ -11,5 +11,6 @@
   "labelRadius": "Radius (m):",
   "labelDistance": "Entfernung (m)",
   "alarmText": "Entfernung überschreitet Schwellenwert.",
-  "alarmConfirm": "Alarm bestätigen"
+  "alarmConfirm": "Alarm bestätigen",
+  "gpsWaiting": "Warte auf GPS..."
 }

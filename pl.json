@@ -11,5 +11,6 @@
   "labelRadius": "Promień (m):",
   "labelDistance": "Odległość (m)",
   "alarmText": "Odległość przekracza ustawiony próg.",
-  "alarmConfirm": "Potwierdź alarm"
+  "alarmConfirm": "Potwierdź alarm",
+  "gpsWaiting": "Oczekiwanie na GPS..."
 }

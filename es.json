@@ -11,5 +11,6 @@
   "labelRadius": "Radio (m):",
   "labelDistance": "Distancia (m)",
   "alarmText": "Distancia supera el límite establecido.",
-  "alarmConfirm": "Confirmar alarma"
+  "alarmConfirm": "Confirmar alarma",
+  "gpsWaiting": "Esperando GPS..."
 }

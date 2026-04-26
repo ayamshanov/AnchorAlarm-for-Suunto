@@ -11,5 +11,6 @@
   "labelRadius": "Poloměr (m):",
   "labelDistance": "Vzdálenost (m)",
   "alarmText": "Vzdálenost překračuje nastavenou hodnotu.",
-  "alarmConfirm": "Potvrdit alarm"
+  "alarmConfirm": "Potvrdit alarm",
+  "gpsWaiting": "Čekání na GPS..."
 }
