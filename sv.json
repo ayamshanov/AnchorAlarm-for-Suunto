@@ -11,5 +11,6 @@
   "labelRadius": "Radius (m):",
   "labelDistance": "Avstånd (m)",
   "alarmText": "Avstånd överskrider inställt gränsvärde.",
-  "alarmConfirm": "Bekräfta larm"
+  "alarmConfirm": "Bekräfta larm",
+  "gpsWaiting": "Väntar på GPS..."
 }

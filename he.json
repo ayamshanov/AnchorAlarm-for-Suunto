@@ -11,5 +11,6 @@
   "labelRadius": "רדיוס (מ'):",
   "labelDistance": "מרחק (מ')",
   "alarmText": "המרחק חורג מהסף שנקבע.",
-  "alarmConfirm": "אשר אזעקה"
+  "alarmConfirm": "אשר אזעקה",
+  "gpsWaiting": "ממתין ל-GPS..."
 }

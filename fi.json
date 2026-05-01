@@ -11,5 +11,6 @@
   "labelRadius": "Säde (m):",
   "labelDistance": "Etäisyys (m)",
   "alarmText": "Etäisyys ylittää asetetun rajan.",
-  "alarmConfirm": "Vahvista hälytys"
+  "alarmConfirm": "Vahvista hälytys",
+  "gpsWaiting": "Odotetaan GPS:ää..."
 }

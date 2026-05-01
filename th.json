@@ -11,5 +11,6 @@
   "labelRadius": "รัศมี (ม.):",
   "labelDistance": "ระยะทาง (ม.)",
   "alarmText": "ระยะทางเกินเกณฑ์ที่กำหนด",
-  "alarmConfirm": "ยืนยันการแจ้งเตือน"
+  "alarmConfirm": "ยืนยันการแจ้งเตือน",
+  "gpsWaiting": "รอสัญญาณ GPS..."
 }

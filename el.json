@@ -11,5 +11,6 @@
   "labelRadius": "Ακτίνα (μ):",
   "labelDistance": "Απόσταση (μ)",
   "alarmText": "Η απόσταση υπερβαίνει το ορισμένο όριο.",
-  "alarmConfirm": "Επιβεβαίωση συναγερμού"
+  "alarmConfirm": "Επιβεβαίωση συναγερμού",
+  "gpsWaiting": "Αναμονή GPS..."
 }
